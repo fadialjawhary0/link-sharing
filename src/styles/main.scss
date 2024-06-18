@@ -1,4 +1,4 @@
-@use 'variables';
+@use './variables' as *;
 @use 'mixins';
 
 * {
@@ -12,5 +12,51 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: $font-family;
+  background-color: $lighter-grey;
+}
+
+h1 {
+  font-size: $heading-m-font-size;
+  font-weight: $heading-m-font-weight;
+  line-height: $heading-m-line-height;
+}
+
+h2 {
+  font-size: $heading-s-font-size;
+  font-weight: $heading-s-font-weight;
+  line-height: $heading-s-line-height;
+}
+
+p {
+  &.body-m {
+    font-size: $body-m-font-size;
+    font-weight: $body-m-font-weight;
+    line-height: $body-m-line-height;
+  }
+
+  &.body-s {
+    font-size: $body-s-font-size;
+    font-weight: $body-s-font-weight;
+    line-height: $body-s-line-height;
+  }
+}
+
+/* Shared Styles */
+.submit-btn {
+  padding: 1.1rem 2.7rem;
+  border: none;
+  border-radius: 0.8rem;
+  background-color: $primary-color;
+  color: $white;
+  font-size: $heading-s-font-size;
+  cursor: pointer;
+}
+
+input {
+  caret-color: $primary-color;
+}
+
+.error {
+  color: $red;
 }

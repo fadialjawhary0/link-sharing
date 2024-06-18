@@ -8,19 +8,15 @@ const Layout = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        height: '100vh',
         justifyContent: 'space-between',
         margin: '0 auto',
-        maxWidth: '140rem',
+        padding: '1rem',
       }}>
-      {/* <Suspense
-        fallback={
-          <div display='flex' flexDirection='column' alignItems='center' justifyContent='center' flexGrow={1}>
-            Loading...
-          </div>
-        }>
+      <Suspense
+        fallback={<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>Loading...</div>}>
         <PublicLayout />
-      </Suspense> */}
+      </Suspense>
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import { lazy } from 'react';
 
-const homePageRouter = lazy(() => import('../views/homePage/homePage.router'));
+const authRouter = lazy(() => import('../views/auth/auth.router'));
 
 export const PublicRouter = [
   {
-    path: '/',
-    name: 'homePage',
-    component: homePageRouter,
+    path: '/*',
+    name: 'auth',
+    component: authRouter,
     exact: true,
   },
 ];
