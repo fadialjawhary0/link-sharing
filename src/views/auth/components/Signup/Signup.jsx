@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import devlinksLogo from '../../../../assets/logo-devlinks-large.svg';
@@ -8,15 +8,18 @@ import passwordIcon from '../../../../assets/icon-password.svg';
 import './SignupStyles.scss';
 import { SignupErrors } from '../../../../constants';
 import { ValidationHelper } from '../../../../validators/validators';
+import { SignupContext } from '../../../../contexts/signup.context';
 
 const Signup = () => {
   const [errorMessages, setErrorMessages] = useState({ email: '', password: '', confirmPass: '' });
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const { signup, currentUser } = useContext(SignupContext);
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
@@ -26,15 +29,26 @@ const Signup = () => {
       setErrorMessages({
         email: email.trim() ? '' : SignupErrors?.Email,
         password: password.trim() && password.trim().length >= 8 ? '' : SignupErrors?.Password,
-        confirmPass: confirmPassword === password ? '' : SignupErrors?.ConfirmPassword,
+        confirmPass: confirmPassword.trim() && confirmPassword === password ? '' : SignupErrors?.ConfirmPassword,
       });
 
-      const isValidInputs = email.trim() && ValidationHelper.isEmail(email) && password.trim() && confirmPassword.trim();
+      const isValidInputs =
+        email.trim() &&
+        ValidationHelper.isEmail(email) &&
+        password.trim() &&
+        password.trim().length >= 8 &&
+        confirmPassword.trim() &&
+        confirmPassword === password;
 
-      // if(isValidInputs) {
-
-      // }
-    } catch {}
+      if (isValidInputs) {
+        setLoading(true);
+        await signup(email, password);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const borderErrorStyle = { border: '1px solid red' };
@@ -72,7 +86,9 @@ const Signup = () => {
               {errorMessages?.confirmPass && <p className='body-s error'>{errorMessages?.confirmPass}</p>}
             </div>
             <p className='body-s'>Password must contain at least 8 characters</p>
-            <button className='submit-btn'>Create new account</button>
+            <button disabled={loading} className='submit-btn'>
+              Create new account
+            </button>
             <p className='body-m'>
               Already have an account? <Link to='/login'>Login</Link>
             </p>
