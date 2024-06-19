@@ -44,6 +44,7 @@ p {
 
 /* Shared Styles */
 .submit-btn {
+  position: relative;
   padding: 1.1rem 2.7rem;
   border: none;
   border-radius: 0.8rem;
@@ -51,13 +52,52 @@ p {
   color: $white;
   font-size: $heading-s-font-size;
   cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.loading {
+    pointer-events: none;
+  }
+
+  &.loading::after {
+    content: '';
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-right-color: #ffffff;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submit-btn:hover {
+  background-color: $secondary-color;
 }
 
 .submit-btn:disabled {
   background-color: $secondary-color;
-  cursor: not-allowed;
 }
 
 input {
   caret-color: $primary-color;
+}
+
+.error {
+  color: $red;
+}
+
+.authError {
+  text-align: center;
+  padding-top: 1rem;
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Signup.module.scss';
+import './SignupStyles.scss';
 
 import devlinksLogo from '../../../../assets/logo-devlinks-large.svg';
 import emailIcon from '../../../../assets/icon-email.svg';
@@ -9,9 +9,10 @@ import passwordIcon from '../../../../assets/icon-password.svg';
 import { SignupErrors } from '../../../../constants';
 import { ValidationHelper } from '../../../../helpers/validators';
 import { AuthContext } from '../../../../contexts/auth.context';
+import Button from '../../../../component/Button';
 
 const Signup = () => {
-  const [errorMessages, setErrorMessages] = useState({ email: '', password: '', confirmPass: '' });
+  const [errorMessages, setErrorMessages] = useState({ email: '', password: '', confirmPass: '', signup: '' });
   const [loading, setLoading] = useState(false);
 
   const emailRef = useRef();
@@ -58,7 +59,9 @@ const Signup = () => {
         setLoading(true);
         await signup(email, password);
       } catch (e) {
-        console.log(e);
+        e?.code === 'auth/email-already-in-use'
+          ? setErrorMessages({ ...errorMessages, signup: 'Email already in use' })
+          : setErrorMessages({ ...errorMessages, signup: 'An error occurred. Please try again' });
       } finally {
         setLoading(false);
       }
@@ -68,45 +71,45 @@ const Signup = () => {
   const borderErrorStyle = { border: '1px solid red' };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.signupSection}>
+    <main className='main'>
+      <section className='signupSection'>
         <img src={devlinksLogo} alt='devlinks' />
-        <div className={styles.signupContainer}>
+        <div className='signupContainer'>
           <h1>Create account</h1>
           <p className='body-m'>Let's get you started sharing your links</p>
           <form onSubmit={handleSubmit}>
-            <div className={styles.inputGroup}>
+            <div className='inputGroup'>
               <label>
                 <p className='body-s'>Email address</p>
               </label>
               <img src={emailIcon} alt='email icon' />
-              <input ref={emailRef} type='email' placeholder='e.g. alex@email.com' style={errorMessages.email ? borderErrorStyle : {}} />
-              {errorMessages?.email && <p className={`body-s ${styles.error}`}>{errorMessages?.email}</p>}
+              <input ref={emailRef} type='email' placeholder='e.g. alex@email.com' name='email' style={errorMessages.email ? borderErrorStyle : {}} />
+              {errorMessages?.email && <p className='body-s error'>{errorMessages?.email}</p>}
             </div>
-            <div className={styles.inputGroup}>
+            <div className='inputGroup'>
               <label>
                 <p className='body-s'>Create password</p>
               </label>
               <img src={passwordIcon} alt='password icon' />
               <input ref={passwordRef} type='password' placeholder='At least 8 characters' style={errorMessages.password ? borderErrorStyle : {}} />
-              {errorMessages?.password && <p className={`body-s ${styles.error}`}>{errorMessages?.password}</p>}
+              {errorMessages?.password && <p className='body-s error'>{errorMessages?.password}</p>}
             </div>
-            <div className={styles.inputGroup}>
+            <div className='inputGroup'>
               <label>
                 <p className='body-s'>Confirm password</p>
               </label>
               <img src={passwordIcon} alt='password icon' />
               <input ref={confirmPasswordRef} type='password' placeholder='At least 8 characters' style={errorMessages.confirmPass ? borderErrorStyle : {}} />
-              {errorMessages?.confirmPass && <p className={`body-s ${styles.error}`}>{errorMessages?.confirmPass}</p>}
+              {errorMessages?.confirmPass && <p className='body-s error'>{errorMessages?.confirmPass}</p>}
             </div>
             <p className='body-s'>Password must contain at least 8 characters</p>
-            <button disabled={loading} className='submit-btn'>
-              Create new account
-            </button>
+
+            <Button loading={loading} text='Create new account' />
             <p className='body-m'>
               Already have an account? <Link to='/login'>Login</Link>
             </p>
           </form>
+          {errorMessages.signup && <h3 className='body-s error authError'>{errorMessages.signup}</h3>}
         </div>
       </section>
     </main>

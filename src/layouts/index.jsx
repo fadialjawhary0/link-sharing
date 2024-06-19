@@ -1,12 +1,20 @@
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
 
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 
 import { AuthContext } from '../contexts/auth.context';
+import { useNavigate } from 'react-router-dom';
 
 const Layout = () => {
+  const navigate = useNavigate();
+
   const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!currentUser) navigate('/login');
+  }, []);
+
   return (
     <div
       style={{

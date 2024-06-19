@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './Login.module.scss';
+import { Link, useNavigate } from 'react-router-dom';
+import './LoginStyles.scss';
 
 import devlinksLogo from '../../../../assets/logo-devlinks-large.svg';
 import emailIcon from '../../../../assets/icon-email.svg';
@@ -9,14 +9,17 @@ import passwordIcon from '../../../../assets/icon-password.svg';
 import { SignupErrors } from '../../../../constants';
 import { ValidationHelper } from '../../../../helpers/validators';
 import { AuthContext } from '../../../../contexts/auth.context';
+import Button from '../../../../component/Button';
 
 const Login = () => {
-  const [errorMessages, setErrorMessages] = useState({ email: '', password: '' });
-  const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+
   const { login } = useContext(AuthContext);
+
+  const [errorMessages, setErrorMessages] = useState({ email: '', password: '', login: '' });
+  const [loading, setLoading] = useState(false);
 
   /*
     This function validates the email, password and confirm password inputs
@@ -29,7 +32,7 @@ const Login = () => {
   const validateInputs = (email, password) => {
     return {
       email: !email.trim() ? SignupErrors?.Email : ValidationHelper.isEmail(email) ? '' : SignupErrors?.InvalidEmail,
-      password: password.trim() && password.trim().length >= 8 ? '' : SignupErrors?.Password,
+      password: password.trim() ? '' : SignupErrors?.Password,
     };
   };
 
@@ -53,8 +56,11 @@ const Login = () => {
       try {
         setLoading(true);
         await login(email, password);
+        navigate('/');
       } catch (e) {
-        console.log(e);
+        e?.code === 'auth/invalid-credential'
+          ? setErrorMessages({ ...errorMessages, login: 'Invalid email or password' })
+          : setErrorMessages({ ...errorMessages, login: 'An error occurred. Please try again' });
       } finally {
         setLoading(false);
       }
@@ -64,36 +70,36 @@ const Login = () => {
   const borderErrorStyle = { border: '1px solid red' };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.loginSection}>
+    <main className='main'>
+      <section className='loginSection'>
         <img src={devlinksLogo} alt='devlinks' />
-        <div className={styles.loginContainer}>
+        <div className='loginContainer'>
           <h1>Login</h1>
           <p className='body-m'>Add your details below to get back into the app</p>
           <form onSubmit={handleSubmit}>
-            <div className={styles.inputGroup}>
+            <div className='inputGroup'>
               <label>
                 <p className='body-s'>Email address</p>
               </label>
               <img src={emailIcon} alt='email icon' />
-              <input ref={emailRef} type='email' placeholder='e.g. alex@email.com' style={errorMessages.email ? borderErrorStyle : {}} />
-              {errorMessages?.email && <p className={`body-s ${styles.error}`}>{errorMessages?.email}</p>}
+              <input ref={emailRef} type='email' placeholder='e.g. alex@email.com' name='email' style={errorMessages.email ? borderErrorStyle : {}} />
+              {errorMessages?.email && <p className='body-s error'>{errorMessages?.email}</p>}
             </div>
-            <div className={styles.inputGroup}>
+            <div className='inputGroup'>
               <label>
                 <p className='body-s'>Create password</p>
               </label>
               <img src={passwordIcon} alt='password icon' />
               <input ref={passwordRef} type='password' placeholder='Enter your password' style={errorMessages.password ? borderErrorStyle : {}} />
-              {errorMessages?.password && <p className={`body-s ${styles.error}`}>{errorMessages?.password}</p>}
+              {errorMessages?.password && <p className='body-s error'>{errorMessages?.password}</p>}
             </div>
-            <button disabled={loading} className='submit-btn'>
-              Login
-            </button>
+
+            <Button loading={loading} text='Login' />
             <p className='body-m'>
               Don't have an account? <Link to='/signup'>Create account</Link>
             </p>
           </form>
+          {errorMessages.login && <h3 className='body-s error authError'>{errorMessages.login}</h3>}
         </div>
       </section>
     </main>
