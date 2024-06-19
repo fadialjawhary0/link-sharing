@@ -19,11 +19,10 @@ const Layout = () => {
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
         height: '100vh',
-        justifyContent: 'space-between',
-        margin: '0 auto',
-        padding: '1rem',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2.4rem',
       }}>
       <Suspense
         fallback={<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>Loading...</div>}>

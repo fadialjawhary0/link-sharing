@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { PrivateRouter } from '../routers';
+import Navbar from '../component/Navbar';
 
 const PrivateLayout = () => {
   const AppBarWrapper = ({ Component, routerName }) => {
@@ -10,7 +11,8 @@ const PrivateLayout = () => {
     }, [routerName]);
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', maxWidth: '127rem', width: '100%' }}>
+        <Navbar />
         <Component />
       </div>
     );
