@@ -1,1 +1,1 @@
-export * from './signup.context';
+export * from './auth.context';
