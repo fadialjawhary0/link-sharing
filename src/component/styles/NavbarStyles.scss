@@ -33,16 +33,37 @@
       background-color: $light-purple;
     }
 
-    img {
-      width: 2rem;
-    }
-
+    .nav-icon,
     h2 {
       color: $medium-grey;
+    }
+
+    &-active > .nav-icon,
+    &-active > h2 {
+      color: $primary-color;
+    }
+
+    &-active {
+      background-color: $light-purple;
     }
   }
 }
 
-li {
-  display: inline-block;
+.navbar-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.signout-icon {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  color: $medium-grey;
+  outline: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $primary-color;
+  }
 }

@@ -3,13 +3,16 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AppContainer from './layouts/index';
 import { AuthProvider } from './contexts/auth.context';
+import { NavLinksProvider } from './contexts/navLink.context';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <AuthProvider>
-          <AppContainer />
+          <NavLinksProvider>
+            <AppContainer />
+          </NavLinksProvider>
         </AuthProvider>
       </BrowserRouter>
     </>

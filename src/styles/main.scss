@@ -101,3 +101,20 @@ input {
   text-align: center;
   padding-top: 1rem;
 }
+
+.secondary-btn {
+  border-radius: 0.8rem;
+  padding: 1.1rem 2.7rem;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  font-size: $heading-s-font-size;
+  font-weight: $heading-s-font-weight;
+  line-height: $heading-s-line-height;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $light-purple;
+  }
+}
