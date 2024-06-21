@@ -1,10 +1,12 @@
 import React from 'react';
 
+import './HomePageStyles.scss';
+
 const HomePage = () => {
   return (
-    <div>
+    <main className='home-main'>
       <div>HomePage</div>
-    </div>
+    </main>
   );
 };
 

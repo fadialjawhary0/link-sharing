@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { PrivateRouter } from '../routers';
 import Navbar from '../component/Navbar';
+import './styles/privateLayout.scss';
 
 const PrivateLayout = () => {
   const AppBarWrapper = ({ Component, routerName }) => {
@@ -11,9 +12,11 @@ const PrivateLayout = () => {
     }, [routerName]);
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', maxWidth: '127rem', width: '100%' }}>
+      <div className='private-container'>
         <Navbar />
-        <Component />
+        <div className='private-component-container'>
+          <Component />
+        </div>
       </div>
     );
   };

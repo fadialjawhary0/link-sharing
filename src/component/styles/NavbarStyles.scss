@@ -10,8 +10,17 @@
   padding: 1.6rem 2.4rem;
   border-radius: 1.2rem;
 
-  img {
+  .logo {
     width: 14rem;
+    height: 3rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../assets/logo-devlinks-large.svg');
+
+    @media (width <= 730px) {
+      width: 3rem;
+      background-image: url('../../assets/logo-devlinks-small.svg');
+    }
   }
 }
 
@@ -19,6 +28,10 @@
   list-style: none;
   display: flex;
   gap: 1.6rem;
+
+  @media (width <= 730px) {
+    gap: 1rem;
+  }
 
   &__item {
     display: flex;
@@ -31,6 +44,12 @@
 
     &:hover {
       background-color: $light-purple;
+    }
+
+    h2 {
+      @media (width <= 730px) {
+        display: none;
+      }
     }
 
     .nav-icon,
@@ -54,16 +73,38 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  .preview-icon {
+    background-image: url('../../assets/icon-preview-header.svg');
+    width: 2rem;
+    height: 2rem;
+    padding: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid $primary-color;
+    border-radius: 0.8rem;
+    display: none;
+
+    @media (width <= 730px) {
+      display: block;
+    }
+  }
+
+  .secondary-btn {
+    @media (width <= 730px) {
+      display: none;
+    }
+  }
 }
 .signout-icon {
   width: 2rem;
   height: 2rem;
   cursor: pointer;
-  color: $medium-grey;
+  color: $primary-color;
   outline: none;
   transition: color 0.3s;
 
   &:hover {
-    color: $primary-color;
+    color: $secondary-color;
   }
 }

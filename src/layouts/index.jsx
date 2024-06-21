@@ -1,10 +1,10 @@
 import React, { Suspense, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
-
 import { AuthContext } from '../contexts/auth.context';
-import { useNavigate } from 'react-router-dom';
+import './styles/index.scss';
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -16,14 +16,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2.4rem',
-      }}>
+    <div className='container'>
       <Suspense
         fallback={<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>Loading...</div>}>
         {currentUser ? <PrivateLayout /> : <PublicLayout />}

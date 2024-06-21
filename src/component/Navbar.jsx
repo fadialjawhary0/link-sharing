@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 
 import './styles/NavbarStyles.scss';
 
-import Logo from '../assets/logo-devlinks-large.svg';
 import { ReactComponent as LinksIcon } from '../assets/icon-links-header.svg';
 import { ReactComponent as ProfileIcon } from '../assets/icon-profile-details-header.svg';
 import { ReactComponent as SignoutIcon } from '../assets/logout-svgrepo-com.svg';
+
 import { AuthContext } from '../contexts/auth.context';
-import { useNavigate } from 'react-router-dom';
 import { NavLinksContext } from '../contexts/navLink.context';
 
 const Navbar = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar-container'>
-      <img src={Logo} alt='DevLinks Logo' />
+      <div className='logo'></div>
       <ul className='navbar-links'>
         <li className={`navbar-links__item ${activeLink === 'links' ? 'navbar-links__item-active' : ''}`} onClick={() => handleLinkClick('links')}>
           <LinksIcon className='nav-icon' />
@@ -43,6 +43,7 @@ const Navbar = () => {
       </ul>
       <div className='navbar-actions'>
         <button className='secondary-btn'>Preview</button>
+        <div className='preview-icon'></div>
         <SignoutIcon className='signout-icon' data-tooltip-id='my-tooltip' data-tooltip-content='Sign out' data-tooltip-place='right' onClick={handleLogout} />
         <Tooltip id='my-tooltip' />
       </div>

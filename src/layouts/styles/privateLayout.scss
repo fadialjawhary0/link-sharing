@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as mixins;
+
+.private-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  max-width: 127rem;
+  width: 100%;
+}
+
+.private-component-container {
+  height: 100%;
+  width: 100%;
+
+  @media (width <= 730px) {
+    padding: 1.6rem;
+  }
+}

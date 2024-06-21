@@ -1,0 +1,14 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as mixins;
+
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
+
+  @media (width <= 730px) {
+    padding: 0;
+  }
+}
