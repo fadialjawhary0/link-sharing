@@ -10,6 +10,12 @@
   align-items: flex-start;
 }
 
+@mixin flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 @mixin flex-column {
   display: flex;
   flex-direction: column;

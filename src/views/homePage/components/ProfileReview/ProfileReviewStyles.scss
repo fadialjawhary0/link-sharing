@@ -1,0 +1,14 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as mixins;
+
+.profile-review-container {
+  @include mixins.flex-center;
+  height: 100%;
+  padding: 10rem 2.4rem;
+  background-color: $white;
+  border-radius: 1.2rem;
+
+  @media (width<=900px) {
+    display: none;
+  }
+}

@@ -1,11 +1,14 @@
 import React from 'react';
 
 import './HomePageStyles.scss';
+import ProfileReview from '../ProfileReview/ProfileReview';
+import LinkCustomizer from '../LinkCustomizer/LinkCustomizer';
 
 const HomePage = () => {
   return (
     <main className='home-main'>
-      <div>HomePage</div>
+      <ProfileReview />
+      <LinkCustomizer />
     </main>
   );
 };

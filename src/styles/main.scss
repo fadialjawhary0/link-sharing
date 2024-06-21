@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.2s linear;
 }
 
 html {
@@ -20,6 +21,11 @@ h1 {
   font-size: $heading-m-font-size;
   font-weight: $heading-m-font-weight;
   line-height: $heading-m-line-height;
+  color: $dark-grey;
+
+  @media (width <= 730px) {
+    font-size: 2.4rem;
+  }
 }
 
 h2 {
@@ -113,6 +119,7 @@ input {
   background-color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 100%;
 
   &:hover {
     background-color: $light-purple;
