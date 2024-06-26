@@ -48,6 +48,30 @@ p {
   }
 }
 
+/* Toast Styles */
+
+.toast-container {
+  position: fixed;
+  bottom: -6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $dark-grey;
+  color: $white;
+  padding: 1.6rem 2.4rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  &.show {
+    bottom: 4.6rem;
+  }
+}
+
 /* Shared Styles */
 .submit-btn {
   position: relative;
@@ -98,6 +122,19 @@ p {
 input {
   caret-color: $primary-color;
   outline: none;
+}
+
+.input-field {
+  padding: 1.2rem 1.6rem 1.2rem 4rem;
+  width: 100%;
+  border: 1px solid $light-grey;
+  border-radius: 0.8rem;
+  outline: none;
+
+  &:focus {
+    box-shadow: 0 0 20px $secondary-color;
+    border: 1px solid $primary-color;
+  }
 }
 
 .error {

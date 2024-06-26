@@ -5,31 +5,25 @@ import { ref, set, get, child } from 'firebase/database';
 import './LinkCustomizerStyles.scss';
 
 import EmptyLinksImg from '../../../../assets/illustration-empty.svg';
+import ChangesSavedIcon from '../../../../assets/icon-changes-saved.svg';
+import ErrorIcon from '../../../../assets/alert-error.svg';
+
 import Link from '../../../../component/Link';
 import { Platforms } from '../../../../constants/platforms.const';
-import { LinksContext, AuthContext } from '../../../../contexts';
+import { LinksContext, AuthContext, ToastContext } from '../../../../contexts';
 import SkeletonComponent from './SkeletonComponent';
-import { LinkErrors } from '../../../../constants';
+import { LinkErrors, ToastMessages } from '../../../../constants';
 import { ValidationHelper } from '../../../../helpers/validators';
 
 const LinkCustomizer = () => {
   const [count, setCount] = useState(0);
   const [error, setError] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [submitLoader, setSubmitLoader] = useState(false);
 
   const { setLinks, links } = useContext(LinksContext);
-  console.log(links);
   const { currentUser } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (currentUser) {
-      fetchLinks(currentUser.uid);
-    } else {
-      setLinks([]);
-      setCount(0);
-    }
-    // eslint-disable-next-line
-  }, [currentUser]);
+  const { showToast } = useContext(ToastContext);
 
   const fetchLinks = async userId => {
     try {
@@ -37,10 +31,8 @@ const LinkCustomizer = () => {
       const snapshot = await get(child(dbRef, `users/${userId}/links`));
       if (snapshot.exists()) {
         const linksData = snapshot.val();
-        const linksArray = Object.values(linksData);
-        setLinks(linksArray);
-        setCount(linksArray.length);
-        console.log('Fetched links:', linksArray);
+        setLinks(linksData);
+        setCount(linksData.length);
       } else {
         console.log('No data available');
         setLinks([]);
@@ -52,6 +44,11 @@ const LinkCustomizer = () => {
       setLoader(false);
     }
   };
+
+  useEffect(() => {
+    fetchLinks(currentUser.uid);
+    // eslint-disable-next-line
+  }, [currentUser]);
 
   const handleClick = () => {
     setCount(count + 1);
@@ -85,15 +82,20 @@ const LinkCustomizer = () => {
     const isValid = !newErrors.some(Boolean);
 
     if (currentUser && isValid) {
+      setSubmitLoader(true);
       try {
         const userLinksRef = ref(database, `users/${currentUser.uid}/links`);
         const linksData = {};
         links.forEach((link, index) => {
           linksData[index] = link;
         });
+
         await set(userLinksRef, linksData);
+        showToast(true, ToastMessages?.SavedSuccessfully, ChangesSavedIcon);
       } catch (error) {
-        console.error('Error saving links: ', error);
+        showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
+      } finally {
+        setSubmitLoader(false);
       }
     }
   };
@@ -133,7 +135,7 @@ const LinkCustomizer = () => {
         )}
       </fieldset>
       <section className='customizer-submit-container'>
-        <button type='button' className='submit-btn' onClick={handleSave}>
+        <button type='button' className={`submit-btn ${submitLoader ? 'loading' : ''}`} disabled={submitLoader} onClick={handleSave}>
           Save
         </button>
       </section>
