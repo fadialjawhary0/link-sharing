@@ -7,8 +7,71 @@
   padding: 10rem 2.4rem;
   background-color: $white;
   border-radius: 1.2rem;
+  position: relative;
 
   @media (width<=900px) {
     display: none;
+  }
+
+  .full-name {
+    position: absolute;
+    top: 28rem;
+    background-color: $white;
+    max-width: 20rem;
+    width: 100%;
+    text-align: center;
+    color: $dark-grey;
+    font-weight: 600;
+  }
+
+  .email-address {
+    position: absolute;
+    top: 30.75rem;
+    background-color: $white;
+    max-width: 20rem;
+    width: 100%;
+    text-align: center;
+    color: $medium-grey;
+  }
+
+  .link-review {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 24rem;
+    height: 4.75rem;
+    border-radius: 0.8rem;
+    border: 1px solid $light-grey;
+    padding: 1rem 2rem;
+
+    .link-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .link-review-1 {
+    top: 37.5rem;
+  }
+
+  .link-review-2 {
+    top: 43.9rem;
+  }
+
+  .link-review-3 {
+    top: 50.25rem;
+  }
+
+  .link-review-4 {
+    top: 56.5rem;
+  }
+
+  .link-review-5 {
+    top: 63rem;
   }
 }
