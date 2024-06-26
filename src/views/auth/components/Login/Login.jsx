@@ -76,7 +76,7 @@ const Login = () => {
         <div className='loginContainer'>
           <h1>Login</h1>
           <p className='body-m'>Add your details below to get back into the app</p>
-          <form onSubmit={handleSubmit}>
+          <form className='login-form' onSubmit={handleSubmit}>
             <div className='inputGroup'>
               <label>
                 <p className='body-s'>Email address</p>

@@ -77,7 +77,7 @@ const Signup = () => {
         <div className='signupContainer'>
           <h1>Create account</h1>
           <p className='body-m'>Let's get you started sharing your links</p>
-          <form onSubmit={handleSubmit}>
+          <form className='signup-form' onSubmit={handleSubmit}>
             <div className='inputGroup'>
               <label>
                 <p className='body-s'>Email address</p>

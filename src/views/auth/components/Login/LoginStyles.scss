@@ -27,7 +27,7 @@
   }
 }
 
-form {
+.login-form {
   @include mixins.flex-column;
   gap: 2.4rem;
 
