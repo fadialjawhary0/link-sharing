@@ -6,8 +6,8 @@
 
 @mixin flex-left {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 @mixin flex-right {
@@ -19,4 +19,11 @@
 @mixin flex-column {
   display: flex;
   flex-direction: column;
+}
+
+@mixin flex-justify-spaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

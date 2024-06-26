@@ -22,11 +22,10 @@ form {
 .customizer-fieldset {
   @include mixins.flex-column;
   gap: 2.4rem;
-  border: none;
   height: 100%;
   padding: 0 4rem 0 4rem;
 
-  .customizer-link-container {
+  .empty-container {
     @include mixins.flex-column;
     align-items: center;
     justify-content: center;
@@ -44,7 +43,7 @@ form {
       }
     }
 
-    .link-description {
+    .empty-description {
       color: $medium-grey;
       max-width: 62rem;
       padding: 0 7rem 0 7rem;
