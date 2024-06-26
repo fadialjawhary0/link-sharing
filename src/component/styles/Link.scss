@@ -1,0 +1,149 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as mixins;
+
+.customizer-link-container {
+  @include mixins.flex-column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  background-color: $lighter-grey;
+  border-radius: 1.2rem;
+  height: fit-content;
+  padding: 2rem;
+}
+
+.customizer-link-actions {
+  @include mixins.flex-justify-spaceBetween;
+
+  h2 {
+    color: $medium-grey;
+  }
+
+  .remove-btn {
+    background-color: transparent;
+    color: $medium-grey;
+    font-size: $body-m-font-size;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.platform-select-box-container {
+  @include mixins.flex-column;
+  gap: 0.8rem;
+  width: 100%;
+
+  label {
+    color: $dark-grey;
+    letter-spacing: 0.4px;
+  }
+
+  .platform-select-box {
+    position: relative;
+    padding: 1rem 1.6rem 1rem 4rem;
+    border: 1px solid $light-grey;
+    border-radius: 0.8rem;
+    background-color: $white;
+    cursor: pointer;
+
+    p {
+      color: $dark-grey;
+    }
+
+    &:hover {
+      box-shadow: 0 0 20px $secondary-color;
+      border: 1px solid $primary-color;
+    }
+
+    .platform-logo {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .arrow-icon {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .platform-select-box-options {
+      position: absolute;
+      top: 6rem;
+      left: 0;
+      width: 100%;
+      background-color: $white;
+      border: 1px solid $light-grey;
+      border-radius: 0.8rem;
+      display: none;
+      z-index: 1;
+      max-height: 34.2rem;
+      overflow-y: scroll;
+      padding: 1.2rem 1.6rem;
+
+      &.show {
+        @include mixins.flex-column;
+      }
+
+      .platform-option {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid $light-grey;
+        padding: 1.2rem 0;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.link-box-container {
+  @include mixins.flex-column;
+  gap: 0.8rem;
+  width: 100%;
+  position: relative;
+
+  label {
+    color: $dark-grey;
+    letter-spacing: 0.4px;
+  }
+
+  .link-input {
+    padding: 1.4rem 1.6rem 1.4rem 4rem;
+    width: 100%;
+    border: 1px solid $light-grey;
+    border-radius: 0.8rem;
+
+    &:hover {
+      box-shadow: 0 0 20px $secondary-color;
+      border: 1px solid $primary-color;
+    }
+
+    &::placeholder {
+      font-size: $body-m-font-size;
+    }
+  }
+
+  img {
+    position: absolute;
+    top: 4rem;
+    left: 1.5rem;
+  }
+
+  .error {
+    position: absolute;
+    top: 4rem;
+    right: 1.5rem;
+  }
+}
