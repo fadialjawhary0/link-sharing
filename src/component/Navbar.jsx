@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav className='navbar-container'>
-      <div className='logo'></div>
+      <div className='logo' onClick={() => navigate('/')}></div>
       <ul className='navbar-links'>
         <li className={`navbar-links__item ${activeLink === 'links' ? 'navbar-links__item-active' : ''}`} onClick={() => handleLinkClick('links')}>
           <LinksIcon className='nav-icon' />
