@@ -33,13 +33,13 @@ const Link = memo(({ index, platform, linkValue, onPlatformChange, onLinkChange,
           <p className='body-s'>Platform</p>
         </label>
         <div className='platform-select-box' onClick={showOptions}>
-          <img className='platform-logo' src={selectedPlatform.logo} alt={platform} />
+          <selectedPlatform.logo className='platform-logo' alt={selectedPlatform?.name} />
           <p className='body-m'>{platform}</p>
           <img className='arrow-icon' src={arrowIcon} alt='link' />
           <div className={`platform-select-box-options platform-select-box-options-${index}`}>
             {Platforms.map((item, idx) => (
               <div key={idx} className='platform-option' onClick={() => onOptionClick(item.name)}>
-                <img src={item.logo} alt={item.name} />
+                <item.logo />
                 <p className='body-m'>{item.name}</p>
               </div>
             ))}

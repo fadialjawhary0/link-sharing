@@ -1,73 +1,101 @@
-import githubLogo from '../assets/socials/icon-github.svg';
-import frontendmentorLogo from '../assets/socials/icon-frontend-mentor.svg';
-import twitterLogo from '../assets/socials/icon-twitter.svg';
-import linkedinLogo from '../assets/socials/icon-linkedin.svg';
-import youtubeLogo from '../assets/socials/icon-youtube.svg';
-import facebookLogo from '../assets/socials/icon-facebook.svg';
-import twitchLogo from '../assets/socials/icon-twitch.svg';
-import devtoLogo from '../assets/socials/icon-devto.svg';
-import codewarsLogo from '../assets/socials/icon-codewars.svg';
-import codepenLogo from '../assets/socials/icon-codepen.svg';
-import freecodecampLogo from '../assets/socials/icon-freecodecamp.svg';
-import gitlabLogo from '../assets/socials/icon-gitlab.svg';
-import hashnodeLogo from '../assets/socials/icon-hashnode.svg';
-import stackoverflowLogo from '../assets/socials/icon-stack-overflow.svg';
+import { ReactComponent as GithubLogo } from '../assets/socials/icon-github.svg';
+import { ReactComponent as FrontendmentorLogo } from '../assets/socials/icon-frontend-mentor.svg';
+import { ReactComponent as TwitterLogo } from '../assets/socials/icon-twitter.svg';
+import { ReactComponent as LinkedinLogo } from '../assets/socials/icon-linkedin.svg';
+import { ReactComponent as YoutubeLogo } from '../assets/socials/icon-youtube.svg';
+import { ReactComponent as FacebookLogo } from '../assets/socials/icon-facebook.svg';
+import { ReactComponent as TwitchLogo } from '../assets/socials/icon-twitch.svg';
+import { ReactComponent as DevtoLogo } from '../assets/socials/icon-devto.svg';
+import { ReactComponent as CodewarsLogo } from '../assets/socials/icon-codewars.svg';
+import { ReactComponent as CodepenLogo } from '../assets/socials/icon-codepen.svg';
+import { ReactComponent as FreecodecampLogo } from '../assets/socials/icon-freecodecamp.svg';
+import { ReactComponent as GitlabLogo } from '../assets/socials/icon-gitlab.svg';
+import { ReactComponent as HashnodeLogo } from '../assets/socials/icon-hashnode.svg';
+import { ReactComponent as StackoverflowLogo } from '../assets/socials/icon-stack-overflow.svg';
 
 export const Platforms = [
   {
     name: 'Github',
-    logo: githubLogo,
+    logo: GithubLogo,
+    backgroundColor: '#1a1a1a',
+    color: '#ffffff',
   },
   {
     name: 'Frontend Mentor',
-    logo: frontendmentorLogo,
+    logo: FrontendmentorLogo,
+    backgroundColor: '#ffffff',
+    color: '#333333',
   },
   {
     name: 'Twitter',
-    logo: twitterLogo,
+    logo: TwitterLogo,
+    backgroundColor: '#43b7e9',
+    color: '#ffffff',
   },
   {
     name: 'LinkedIn',
-    logo: linkedinLogo,
+    logo: LinkedinLogo,
+    backgroundColor: '#2d68ff',
+    color: '#ffffff',
   },
   {
     name: 'Youtube',
-    logo: youtubeLogo,
+    logo: YoutubeLogo,
+    backgroundColor: '#ee3939',
+    color: '#ffffff',
   },
   {
     name: 'Facebook',
-    logo: facebookLogo,
+    logo: FacebookLogo,
+    backgroundColor: '#2442ac',
+    color: '#ffffff',
   },
   {
     name: 'Twitch',
-    logo: twitchLogo,
+    logo: TwitchLogo,
+    backgroundColor: '#6441a5',
+    color: '#ffffff',
   },
   {
     name: 'Dev.to',
-    logo: devtoLogo,
+    logo: DevtoLogo,
+    backgroundColor: '#333333',
+    color: '#ffffff',
   },
   {
     name: 'Codewars',
-    logo: codewarsLogo,
+    logo: CodewarsLogo,
+    backgroundColor: '#8a1a50',
+    color: '#ffffff',
   },
   {
     name: 'Codepen',
-    logo: codepenLogo,
+    logo: CodepenLogo,
+    backgroundColor: '#464646',
+    color: '#ffffff',
   },
   {
     name: 'FreeCodeCamp',
-    logo: freecodecampLogo,
+    logo: FreecodecampLogo,
+    backgroundColor: '#302267',
+    color: '#ffffff',
   },
   {
     name: 'Gitlab',
-    logo: gitlabLogo,
+    logo: GitlabLogo,
+    backgroundColor: '#eb4925',
+    color: '#ffffff',
   },
   {
     name: 'Hashnode',
-    logo: hashnodeLogo,
+    logo: HashnodeLogo,
+    backgroundColor: '#0330d1',
+    color: '#ffffff',
   },
   {
     name: 'Stack Overflow',
-    logo: stackoverflowLogo,
+    logo: StackoverflowLogo,
+    backgroundColor: '#f48024',
+    color: '#ffffff',
   },
 ];

@@ -47,6 +47,7 @@
     border-radius: 0.8rem;
     background-color: $white;
     cursor: pointer;
+    color: $medium-grey;
 
     p {
       color: $dark-grey;
@@ -102,6 +103,7 @@
 
         &:last-child {
           padding-bottom: 0;
+          border: none;
         }
       }
     }
