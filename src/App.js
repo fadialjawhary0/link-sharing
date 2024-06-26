@@ -2,17 +2,18 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import AppContainer from './layouts/index';
-import { AuthProvider } from './contexts/auth.context';
-import { NavLinksProvider } from './contexts/navLink.context';
+import { AuthProvider, NavLinksProvider, LinksProvider } from './contexts/index';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <AuthProvider>
-          <NavLinksProvider>
-            <AppContainer />
-          </NavLinksProvider>
+          <LinksProvider>
+            <NavLinksProvider>
+              <AppContainer />
+            </NavLinksProvider>
+          </LinksProvider>
         </AuthProvider>
       </BrowserRouter>
     </>
