@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage, database } from '../../../../firebase';
+import { ref as databaseRef, set } from 'firebase/database';
 
 import './ProfileDetailsStyles.scss';
 
+import { AuthContext, ProfileDetailsContext, ToastContext } from '../../../../contexts';
 import { ReactComponent as UploadIcon } from '../../../../assets/icon-upload-image.svg';
+import { ToastMessages } from '../../../../constants';
 import InputFields from './InputFields';
+import ErrorIcon from '../../../../assets/alert-error.svg';
 
 const ProfileDetails = () => {
+  const { currentUser } = useContext(AuthContext);
+  const { profileDetails } = useContext(ProfileDetailsContext);
+  const { showToast } = useContext(ToastContext);
+
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -19,6 +29,44 @@ const ProfileDetails = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePictureUpload = async () => {
+    if (image && currentUser) {
+      const storageRef = ref(storage, `profileImages/${currentUser.uid}/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        error => {
+          showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          savePicture(downloadURL);
+        },
+      );
+    }
+  };
+
+  const savePicture = async imageURL => {
+    const { firstName, lastName, email } = profileDetails;
+
+    try {
+      const userRef = databaseRef(database, `users/${currentUser.uid}/profile`);
+      await set(userRef, {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        profileImage: imageURL,
+      });
+    } catch {
+      showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }
   };
 
@@ -67,7 +115,7 @@ const ProfileDetails = () => {
         </div>
       </section>
 
-      <InputFields />
+      <InputFields handlePictureUpload={handlePictureUpload} />
     </form>
   );
 };

@@ -13,6 +13,16 @@
     display: none;
   }
 
+  .profile-picture {
+    position: absolute;
+    top: 16.3rem;
+    background-color: $white;
+    width: 9.6rem;
+    height: 9.6rem;
+    border-radius: 50%;
+    border: 2px solid $primary-color;
+  }
+
   .full-name {
     position: absolute;
     top: 28rem;
