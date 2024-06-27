@@ -6,15 +6,17 @@ import './ProfileReviewStyles.scss';
 
 import PhoneMockupImg from '../../../../assets/illustration-phone-mockup.svg';
 import { ReactComponent as RightArrow } from '../../../../assets/icon-arrow-right.svg';
+import ErrorIcon from '../../../../assets/alert-error.svg';
 
-import { AuthContext, LinksContext } from '../../../../contexts';
-import { Platforms } from '../../../../constants';
+import { AuthContext, LinksContext, ToastContext } from '../../../../contexts';
+import { Platforms, ToastMessages } from '../../../../constants';
 
 const ProfileReview = () => {
   const { links } = useContext(LinksContext);
   const { currentUser } = useContext(AuthContext);
+  const { showToast } = useContext(ToastContext);
 
-  const [userData, setUserData] = useState({ name: '', emailAddress: '' });
+  const [userData, setUserData] = useState({ name: '', emailAddress: '', profileImageURL: '' });
 
   const fetchInfo = async userId => {
     try {
@@ -22,13 +24,11 @@ const ProfileReview = () => {
       const snapshot = await get(child(dbRef, `users/${userId}/profile`));
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const { firstName, lastName, email } = data;
-        setUserData({ name: `${firstName} ${lastName}`, emailAddress: email });
-      } else {
-        console.log('No data available');
+        const { firstName = '', lastName = '', email, profileImage } = data;
+        setUserData({ name: `${firstName} ${lastName}`, emailAddress: email, profileImageURL: profileImage });
       }
-    } catch (error) {
-      console.error('Error fetching profile details: ', error);
+    } catch {
+      showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }
   };
 
@@ -36,12 +36,14 @@ const ProfileReview = () => {
     if (currentUser) {
       fetchInfo(currentUser.uid);
     }
+    // eslint-disable-next-line
   }, [currentUser, userData]);
 
   return (
     <section className='profile-review-container'>
       <img src={PhoneMockupImg} alt='Phone mockup' />
 
+      {userData?.profileImageURL && <img className='profile-picture' src={userData?.profileImageURL} alt='user' />}
       <p className='body-m full-name'>{userData?.name}</p>
       <p className='body-s email-address'>{userData?.emailAddress}</p>
 

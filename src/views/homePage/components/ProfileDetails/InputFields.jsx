@@ -4,13 +4,16 @@ import { database } from '../../../../firebase';
 
 import './InputFieldsStyles.scss';
 
-import { Errors } from '../../../../constants';
+import { Errors, ToastMessages } from '../../../../constants';
 import { ValidationHelper } from '../../../../helpers/validators';
-import { AuthContext, ProfileDetailsContext } from '../../../../contexts';
+import { AuthContext, ProfileDetailsContext, ToastContext } from '../../../../contexts';
+import ChangesSavedIcon from '../../../../assets/icon-changes-saved.svg';
+import ErrorIcon from '../../../../assets/alert-error.svg';
 
-const InputFields = () => {
+const InputFields = ({ handlePictureUpload }) => {
   const { currentUser } = useContext(AuthContext);
   const { profileDetails, setValues, updateValue } = useContext(ProfileDetailsContext);
+  const { showToast } = useContext(ToastContext);
 
   const [submitLoader, setSubmitLoader] = useState(false);
   const [errors, setErrors] = useState({ firstName: '', lastName: '' });
@@ -23,11 +26,9 @@ const InputFields = () => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         setValues(data?.firstName, data?.lastName, data?.email);
-      } else {
-        console.log('No data available');
       }
-    } catch (error) {
-      console.error('Error fetching profile details: ', error);
+    } catch {
+      showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }
   };
 
@@ -35,12 +36,13 @@ const InputFields = () => {
     if (currentUser) {
       fetchInfo(currentUser.uid);
     }
+    // eslint-disable-next-line
   }, [currentUser]);
 
   const validateInputs = (firstName, lastName) => {
     return {
-      firstName: firstName.trim() ? '' : Errors?.Empty,
-      lastName: lastName.trim() ? '' : Errors?.Empty,
+      firstName: firstName?.trim() ? '' : Errors?.Empty,
+      lastName: lastName?.trim() ? '' : Errors?.Empty,
     };
   };
 
@@ -65,9 +67,10 @@ const InputFields = () => {
           lastName,
           email,
         });
-        console.log('Profile details saved successfully');
-      } catch (error) {
-        console.error('Error saving profile details:', error);
+        await handlePictureUpload();
+        showToast(true, ToastMessages?.SavedSuccessfully, ChangesSavedIcon);
+      } catch {
+        showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
       } finally {
         setSubmitLoader(false);
       }

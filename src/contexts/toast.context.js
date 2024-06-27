@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const ToastContext = createContext();
 
@@ -17,7 +17,7 @@ export const ToastProvider = ({ children }) => {
       {children}
       {toast.show && (
         <div className={`toast-container ${visible ? 'show' : ''}`}>
-          <img src={toast?.icon} alt='toast-icon' />
+          {toast?.icon && <img src={toast?.icon} alt='toast-icon' />}
           <p className='body-m'>{toast?.message}</p>
         </div>
       )}
