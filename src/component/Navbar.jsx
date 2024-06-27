@@ -42,7 +42,9 @@ const Navbar = () => {
         </li>
       </ul>
       <div className='navbar-actions'>
-        <button className='secondary-btn'>Preview</button>
+        <button className='secondary-btn' onClick={() => navigate('/preview')}>
+          Preview
+        </button>
         <div className='preview-icon'></div>
         <SignoutIcon className='signout-icon' data-tooltip-id='my-tooltip' data-tooltip-content='Sign out' data-tooltip-place='right' onClick={handleLogout} />
         <Tooltip id='my-tooltip' />

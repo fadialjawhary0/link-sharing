@@ -87,15 +87,15 @@ const ProfileDetails = () => {
   };
 
   const renderUploadSection = () => {
-    return imagePreview ? (
+    return image ? (
       <div className='post-img-upload-container'>
         <label className='upload-img_uploader' htmlFor='inputFile' style={{ ...uploadImgStyles }}>
           <input id='inputFile' type='file' accept='image/png, image/jpeg' onChange={handleImageChange} style={inputStyles} />
         </label>
-        <div className='post-img-upload'>
+        <label className='post-img-upload' htmlFor='inputFile'>
           <UploadIcon />
           <p>+ Upload Image</p>
-        </div>
+        </label>
       </div>
     ) : (
       <label className='upload-img_uploader' htmlFor='inputFile'>

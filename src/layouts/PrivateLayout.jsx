@@ -13,7 +13,7 @@ const PrivateLayout = () => {
 
     return (
       <div className='private-container'>
-        <Navbar />
+        {routerName !== 'preview' && <Navbar />}
         <div className='private-component-container'>
           <Component />
         </div>
