@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
 import { AuthContext } from '../contexts/auth.context';
+import Loader from '../component/Loader';
 import './styles/index.scss';
 
 const Layout = () => {
@@ -26,10 +27,7 @@ const Layout = () => {
 
   return (
     <div className='container' style={{ display: isUserPage ? 'unset' : currentUser ? 'flex' : 'unset' }}>
-      <Suspense
-        fallback={<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>Loading...</div>}>
-        {currentUser ? <PrivateLayout /> : <PublicLayout />}
-      </Suspense>
+      <Suspense fallback={<Loader />}>{currentUser ? <PrivateLayout /> : <PublicLayout />}</Suspense>
     </div>
   );
 };
