@@ -106,7 +106,10 @@ const Signup = () => {
 
             <Button loading={loading} text='Create new account' />
             <p className='body-m'>
-              Already have an account? <Link to='/login'>Login</Link>
+              Already have an account?{' '}
+              <Link to='/login' className='login-btn'>
+                Login
+              </Link>
             </p>
           </form>
           {errorMessages.signup && <h3 className='body-s error authError'>{errorMessages.signup}</h3>}

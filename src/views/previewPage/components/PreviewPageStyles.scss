@@ -16,6 +16,12 @@
   flex-direction: column;
   align-items: center;
 
+  @media (width <= 730px) {
+    top: 10rem;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   .profile-picture {
     top: 16.3rem;
     background-color: $white;
