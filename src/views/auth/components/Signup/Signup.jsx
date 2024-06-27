@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignupStyles.scss';
 
 import devlinksLogo from '../../../../assets/logo-devlinks-large.svg';
@@ -12,6 +12,8 @@ import { AuthContext } from '../../../../contexts/auth.context';
 import Button from '../../../../component/Button';
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [errorMessages, setErrorMessages] = useState({ email: '', password: '', confirmPass: '', signup: '' });
   const [loading, setLoading] = useState(false);
 
@@ -58,6 +60,7 @@ const Signup = () => {
       try {
         setLoading(true);
         await signup(email, password);
+        navigate('/');
       } catch (e) {
         e?.code === 'auth/email-already-in-use'
           ? setErrorMessages({ ...errorMessages, signup: 'Email already in use' })

@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const signout = () => {
+    setCurrentUser(null);
     return signOut(auth);
   };
 

@@ -34,6 +34,7 @@ const LinkCustomizer = () => {
         setLinks(linksData);
         setCount(linksData.length);
       } else {
+        setLinks([]);
         setCount(0);
       }
     } catch (error) {
