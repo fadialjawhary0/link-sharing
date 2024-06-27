@@ -1,0 +1,18 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as mixins;
+
+.skeleton-full-name {
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+}
+
+.skeleton-email {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  border-radius: 0.5rem;
+}
+
+.skeleton-link {
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+}
