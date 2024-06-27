@@ -3,14 +3,15 @@ import { createContext, useState } from 'react';
 export const ProfileDetailsContext = createContext();
 
 export const ProfileDetailsProvider = ({ children }) => {
-  const [profileDetails, setProfileDetails] = useState({ firstName: '', lastName: '', email: '', profilePic: null });
+  const [profileDetails, setProfileDetails] = useState({ firstName: '', lastName: '', email: '', profileImage: '' });
 
-  const setValues = (firstName, lastName, email) => {
+  const setValues = (firstName, lastName, email, profileImage) => {
     setProfileDetails(prevDetails => ({
       ...prevDetails,
       firstName,
       lastName,
       email,
+      profileImage,
     }));
   };
 

@@ -13,11 +13,11 @@ import ErrorIcon from '../../../../assets/alert-error.svg';
 
 const ProfileDetails = () => {
   const { currentUser } = useContext(AuthContext);
-  const { profileDetails } = useContext(ProfileDetailsContext);
+  const { profileDetails, setValues } = useContext(ProfileDetailsContext);
   const { showToast } = useContext(ToastContext);
 
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState(profileDetails?.profileImage || null);
 
   const handleImageChange = event => {
     const file = event.target.files[0];
@@ -48,23 +48,26 @@ const ProfileDetails = () => {
         },
         async () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          savePicture(downloadURL);
+          await saveProfileDetails(downloadURL);
         },
       );
+    } else {
+      await saveProfileDetails(profileDetails?.profileImage);
     }
   };
 
-  const savePicture = async imageURL => {
+  const saveProfileDetails = async imageURL => {
     const { firstName, lastName, email } = profileDetails;
 
     try {
       const userRef = databaseRef(database, `users/${currentUser.uid}/profile`);
       await set(userRef, {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        firstName,
+        lastName,
+        email,
         profileImage: imageURL,
       });
+      setValues(firstName, lastName, email, imageURL);
     } catch {
       showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }

@@ -25,7 +25,7 @@ const InputFields = ({ handlePictureUpload }) => {
       const snapshot = await get(child(dbRef, `users/${userId}/profile`));
       if (snapshot.exists()) {
         const data = snapshot.val();
-        setValues(data?.firstName, data?.lastName, data?.email);
+        setValues(data?.firstName, data?.lastName, data?.email, data?.profileImage);
       }
     } catch {
       showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
@@ -66,6 +66,7 @@ const InputFields = ({ handlePictureUpload }) => {
           firstName,
           lastName,
           email,
+          profileImage: profileDetails.profileImage,
         });
         await handlePictureUpload();
         showToast(true, ToastMessages?.SavedSuccessfully, ChangesSavedIcon);
