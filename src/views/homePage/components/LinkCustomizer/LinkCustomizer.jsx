@@ -34,8 +34,6 @@ const LinkCustomizer = () => {
         setLinks(linksData);
         setCount(linksData.length);
       } else {
-        console.log('No data available');
-        setLinks([]);
         setCount(0);
       }
     } catch (error) {

@@ -4,6 +4,7 @@ export const LinksContext = createContext();
 
 export const LinksProvider = ({ children }) => {
   const [links, setLinks] = useState([]);
+  console.log(links);
 
   const value = {
     setLinks,

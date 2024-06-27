@@ -1,0 +1,61 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as mixins;
+
+.preview-page {
+  position: absolute;
+  left: 50%;
+  top: 21rem;
+  transform: translateX(-50%);
+  background-color: $white;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+  padding: 4.8rem 0;
+  border-radius: 2.4rem;
+  min-height: 57rem;
+  width: 34rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .profile-picture {
+    top: 16.3rem;
+    background-color: $white;
+    width: 9.6rem;
+    height: 9.6rem;
+    border-radius: 50%;
+    border: 2px solid $primary-color;
+  }
+
+  .full-name {
+    margin-top: 3rem;
+  }
+
+  .email {
+    color: $medium-grey;
+    margin-top: 1rem;
+  }
+
+  .links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 5rem;
+
+    .link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 24rem;
+      height: 4.75rem;
+      border-radius: 0.8rem;
+      border: 1px solid $light-grey;
+      padding: 1rem 2rem;
+
+      .link-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -11,8 +11,14 @@ export const PrivateRouter = [
     exact: true,
   },
   {
-    path: '/preview',
+    path: '/preview/*',
     name: 'preview',
+    component: previewRouter,
+    exact: true,
+  },
+  {
+    path: '/user/*',
+    name: 'user',
     component: previewRouter,
     exact: true,
   },

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { PublicRouter } from '../routers';
+import PreviewNavbar from '../component/PreviewNavbar';
 
 const PublicLayout = () => {
   const AppBarWrapper = ({ Component, routerName }) => {
@@ -9,8 +10,11 @@ const PublicLayout = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [routerName]);
 
+    const isUserPage = routerName === 'user';
+
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: isUserPage ? '100%' : '100vh' }}>
+        {isUserPage && <PreviewNavbar />}
         <Component />
       </div>
     );

@@ -52,7 +52,7 @@ p {
 
 .toast-container {
   position: fixed;
-  bottom: -6rem;
+  bottom: -9rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: $dark-grey;
@@ -178,4 +178,9 @@ fieldset {
 button {
   border: none;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

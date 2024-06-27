@@ -6,7 +6,7 @@ const PreviewPage = lazy(() => import('./components/PreviewPage'));
 const Router = () => {
   return (
     <Routes>
-      <Route path='/' element={<PreviewPage />} />
+      <Route path='/:userId' element={<PreviewPage />} />
     </Routes>
   );
 };

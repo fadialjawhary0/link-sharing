@@ -8,6 +8,11 @@
   height: 100%;
   max-width: 127rem;
   width: 100%;
+  padding: 2.4rem;
+
+  @media (width <= 730px) {
+    padding: 0;
+  }
 }
 
 .private-component-container {
@@ -17,4 +22,9 @@
   @media (width <= 730px) {
     padding: 1.6rem;
   }
+}
+
+.private-preview-container {
+  max-width: unset;
+  padding: 0;
 }

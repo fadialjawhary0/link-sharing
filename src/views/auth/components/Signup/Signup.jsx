@@ -71,7 +71,7 @@ const Signup = () => {
   const borderErrorStyle = { border: '1px solid red' };
 
   return (
-    <main className='main'>
+    <main className='signup-main'>
       <section className='signupSection'>
         <img src={devlinksLogo} alt='devlinks' />
         <div className='signupContainer'>

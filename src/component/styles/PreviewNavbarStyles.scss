@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as mixins;
+
+.preview-navbar {
+  height: 36rem;
+  width: 100%;
+  background-color: $primary-color;
+  color: $white;
+  border-end-end-radius: 3.75rem;
+  border-end-start-radius: 3.75rem;
+  padding: 2.4rem;
+}
+
+.preview-btns-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  padding: 1.6rem;
+  border-radius: 1.2rem;
+  max-width: 138rem;
+  margin: 0 auto;
+
+  .editor-btn {
+    width: 18rem;
+    border-radius: 0.8rem;
+    padding: 1.1rem 2rem;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    font-size: $heading-s-font-size;
+    font-weight: $heading-s-font-weight;
+    line-height: $heading-s-line-height;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
+
+  .share-btn {
+    position: relative;
+    padding: 1.1rem 2.7rem;
+    border: none;
+    border-radius: 0.8rem;
+    background-color: $primary-color;
+    color: $white;
+    font-size: $heading-s-font-size;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border: 1px solid $primary-color;
+
+    &:hover {
+      background-color: $white;
+      color: $primary-color;
+    }
+  }
+}

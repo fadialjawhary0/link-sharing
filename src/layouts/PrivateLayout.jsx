@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import './styles/privateLayout.scss';
+
 import { PrivateRouter } from '../routers';
 import Navbar from '../component/Navbar';
-import './styles/privateLayout.scss';
+import PreviewNavbar from '../component/PreviewNavbar';
 
 const PrivateLayout = () => {
   const AppBarWrapper = ({ Component, routerName }) => {
@@ -11,9 +13,12 @@ const PrivateLayout = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [routerName]);
 
+    const isPreview = routerName === 'preview' || routerName === 'user';
+
     return (
-      <div className='private-container'>
-        {routerName !== 'preview' && <Navbar />}
+      <div className={`private-container ${isPreview ? 'private-preview-container' : ''}`}>
+        {isPreview ? <PreviewNavbar /> : <Navbar />}
+
         <div className='private-component-container'>
           <Component />
         </div>

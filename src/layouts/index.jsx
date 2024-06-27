@@ -1,5 +1,5 @@
 import React, { Suspense, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import PublicLayout from './PublicLayout';
 import PrivateLayout from './PrivateLayout';
@@ -8,15 +8,24 @@ import './styles/index.scss';
 
 const Layout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { currentUser } = useContext(AuthContext);
 
+  const isUserPage = location.pathname.startsWith('/user');
+
   useEffect(() => {
-    if (!currentUser) navigate('/login');
+    if (!currentUser) {
+      if (isUserPage) {
+        navigate(location.pathname);
+      } else {
+        navigate('/login');
+      }
+    }
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container' style={{ display: isUserPage ? 'unset' : currentUser ? 'flex' : 'unset' }}>
       <Suspense
         fallback={<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>Loading...</div>}>
         {currentUser ? <PrivateLayout /> : <PublicLayout />}

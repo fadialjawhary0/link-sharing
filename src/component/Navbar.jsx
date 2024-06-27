@@ -14,7 +14,7 @@ import { NavLinksContext } from '../contexts/navLink.context';
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const { signout } = useContext(AuthContext);
+  const { signout, currentUser } = useContext(AuthContext);
   const { setActiveLink, activeLink } = useContext(NavLinksContext);
 
   const handleLinkClick = link => setActiveLink(link);
@@ -42,7 +42,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className='navbar-actions'>
-        <button className='secondary-btn' onClick={() => navigate('/preview')}>
+        <button className='secondary-btn' onClick={() => navigate(`/preview/${currentUser?.uid}`)}>
           Preview
         </button>
         <div className='preview-icon'></div>
