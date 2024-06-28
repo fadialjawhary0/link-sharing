@@ -7,24 +7,29 @@ import './styles/NavbarStyles.scss';
 import { ReactComponent as LinksIcon } from '../assets/icon-links-header.svg';
 import { ReactComponent as ProfileIcon } from '../assets/icon-profile-details-header.svg';
 import { ReactComponent as SignoutIcon } from '../assets/logout-svgrepo-com.svg';
+import ErrorIcon from '../assets/alert-error.svg';
 
-import { AuthContext } from '../contexts/auth.context';
-import { NavLinksContext } from '../contexts/navLink.context';
+import { ToastContext, NavLinksContext, AuthContext } from '../contexts/index';
+import { ToastMessages } from '../constants';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const { signout, currentUser } = useContext(AuthContext);
   const { setActiveLink, activeLink } = useContext(NavLinksContext);
+  const { showToast } = useContext(ToastContext);
 
-  const handleLinkClick = link => setActiveLink(link);
+  const handleLinkClickLocalStorage = link => {
+    localStorage.setItem('activeLink', link);
+    setActiveLink(link);
+  };
 
   const handleLogout = async () => {
     try {
       await signout();
       navigate('/login');
     } catch (e) {
-      console.log(e);
+      showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }
   };
 
@@ -32,11 +37,13 @@ const Navbar = () => {
     <nav className='navbar-container'>
       <div className='logo' onClick={() => navigate('/')}></div>
       <ul className='navbar-links'>
-        <li className={`navbar-links__item ${activeLink === 'links' ? 'navbar-links__item-active' : ''}`} onClick={() => handleLinkClick('links')}>
+        <li className={`navbar-links__item ${activeLink === 'links' ? 'navbar-links__item-active' : ''}`} onClick={() => handleLinkClickLocalStorage('links')}>
           <LinksIcon className='nav-icon' />
           <h2>Links</h2>
         </li>
-        <li className={`navbar-links__item ${activeLink === 'profile' ? 'navbar-links__item-active' : ''}`} onClick={() => handleLinkClick('profile')}>
+        <li
+          className={`navbar-links__item ${activeLink === 'profile' ? 'navbar-links__item-active' : ''}`}
+          onClick={() => handleLinkClickLocalStorage('profile')}>
           <ProfileIcon className='nav-icon' />
           <h2>Profile Details</h2>
         </li>

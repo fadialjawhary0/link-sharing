@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 export const NavLinksContext = createContext();
 
 export const NavLinksProvider = ({ children }) => {
-  const [activeLink, setActiveLink] = useState('links');
+  const [activeLink, setActiveLink] = useState(localStorage.getItem('activeLink') || 'links');
 
   const value = {
     setActiveLink,
