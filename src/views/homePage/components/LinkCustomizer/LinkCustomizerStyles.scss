@@ -1,7 +1,7 @@
 @use '../../../../styles/variables' as *;
 @use '../../../../styles/mixins' as mixins;
 
-form {
+.link-customizer-form {
   @include mixins.flex-column;
   background-color: $white;
   border-radius: 1.2rem;

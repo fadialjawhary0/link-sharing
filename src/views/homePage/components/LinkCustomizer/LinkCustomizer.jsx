@@ -111,7 +111,7 @@ const LinkCustomizer = () => {
   };
 
   return (
-    <form>
+    <form className='link-customizer-form'>
       <h1 className='customizer-title'>Customize your links</h1>
       <p className='body-m customizer-description'>Add/edit/remove links below and then share all your profiles with the world!</p>
       <fieldset className='customizer-fieldset'>
