@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { database } from '../../../../firebase';
 import { ref, set, get, child } from 'firebase/database';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import './LinkCustomizerStyles.scss';
 
@@ -11,9 +12,9 @@ import ErrorIcon from '../../../../assets/alert-error.svg';
 import Link from '../../../../component/Link';
 import { Platforms } from '../../../../constants/platforms.const';
 import { LinksContext, AuthContext, ToastContext } from '../../../../contexts';
-import SkeletonComponent from './SkeletonComponent';
 import { LinkErrors, ToastMessages } from '../../../../constants';
 import { ValidationHelper } from '../../../../helpers/validators';
+import SkeletonComponent from './SkeletonComponent';
 
 const LinkCustomizer = () => {
   const [count, setCount] = useState(0);
@@ -70,6 +71,16 @@ const LinkCustomizer = () => {
     setCount(newLinks.length);
   };
 
+  const handleDragEnd = result => {
+    if (!result.destination) return;
+
+    const reorderedLinks = Array.from(links);
+    const [removed] = reorderedLinks.splice(result.source.index, 1);
+    reorderedLinks.splice(result.destination.index, 0, removed);
+
+    setLinks(reorderedLinks);
+  };
+
   const handleSave = async () => {
     const newErrors = links.map(item => {
       if (!item?.link.trim()) return LinkErrors?.Empty;
@@ -110,18 +121,33 @@ const LinkCustomizer = () => {
         {loader ? (
           <SkeletonComponent />
         ) : count > 0 ? (
-          links.map((link, index) => (
-            <Link
-              key={index}
-              index={index + 1}
-              platform={link.platform}
-              linkValue={link.link}
-              onPlatformChange={platform => handlePlatformChange(index, platform)}
-              onLinkChange={linkValue => handleLinkChange(index, linkValue)}
-              onLinkRemoval={() => handleLinkRemoval(index)}
-              error={error[index]}
-            />
-          ))
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId='links'>
+              {provided => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {links.map((link, index) => (
+                    <Draggable key={index} draggableId={index.toString()} index={index}>
+                      {provided => (
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          <Link
+                            key={index}
+                            index={index + 1}
+                            platform={link.platform}
+                            linkValue={link.link}
+                            onPlatformChange={platform => handlePlatformChange(index, platform)}
+                            onLinkChange={linkValue => handleLinkChange(index, linkValue)}
+                            onLinkRemoval={() => handleLinkRemoval(index)}
+                            error={error[index]}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         ) : (
           <div className='empty-container'>
             <img src={EmptyLinksImg} alt='Empty illustration' />
