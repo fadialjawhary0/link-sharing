@@ -52,7 +52,7 @@ p {
 
 .toast-container {
   position: fixed;
-  bottom: -9rem;
+  bottom: -14rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: $dark-grey;
@@ -66,6 +66,10 @@ p {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  @media (width <= 730px) {
+    width: 80%;
+  }
 
   &.show {
     bottom: 4.6rem;
