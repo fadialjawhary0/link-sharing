@@ -24,9 +24,11 @@ Link Sharing is a full responsive website that allows users to create a personal
 
 - User Authentication: Sign up, log in, and log out functionality.
 - Link Management: Add, edit, remove.
+- Reorder links with drag and drop functionality
 - Profile Customization: Update profile picture, first name, last name, and email.
 - Shareable Preview: Generate a shareable link preview page.
 - Toast Notifications: Real-time feedback for user actions (e.g., saving changes, errors).
+- Skeletons for loading states
 - Responsive Design: Optimized for both desktop and mobile devices.
 
 ## Technologies Used
@@ -37,6 +39,7 @@ Link Sharing is a full responsive website that allows users to create a personal
 - React Router for navigation
 - Context API for state management
 - React Toastify for notifications
+- react-beautiful-dnd (for drag-and-drop functionality)
 - Various React hooks
 
 ## Installation
@@ -61,6 +64,9 @@ Link Sharing is a full responsive website that allows users to create a personal
    npm start
    ```
 2. Open your browser and go to http://localhost:3000 to view the website.
+3. Sign up for a new account or log in with an existing account.
+4. Add, edit, remove, and reorder your profile links as needed.
+5. Share your profile link to let others view your links.
 
 ## Screenshots
 
