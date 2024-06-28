@@ -12,7 +12,7 @@ import { AuthContext, LinksContext, ToastContext } from '../../../../contexts';
 import { Platforms, ToastMessages } from '../../../../constants';
 
 const ProfileReview = () => {
-  const { links } = useContext(LinksContext);
+  const { links, retrieveLinks } = useContext(LinksContext);
   const { currentUser } = useContext(AuthContext);
   const { showToast } = useContext(ToastContext);
 
@@ -31,6 +31,11 @@ const ProfileReview = () => {
       showToast(true, ToastMessages?.ErrorOccurred, ErrorIcon);
     }
   };
+
+  useEffect(() => {
+    retrieveLinks(currentUser?.uid);
+    // eslint-disable-next-line
+  }, [currentUser]);
 
   useEffect(() => {
     if (currentUser) {
